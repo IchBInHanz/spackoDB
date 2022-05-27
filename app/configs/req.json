@@ -1,0 +1,29 @@
+{
+    "actions": {
+        "set": {
+            "params": {
+                "adminKey": {
+                    "req": true,
+                    "type": "string",
+                    "minLength": 24,
+                    "maxLength": 64,
+                    "regex": null
+                },
+                "ref": {
+                    "req": true,
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 1024,
+                    "regex": null
+                },
+                "data": {
+                    "req": true,
+                    "type": "object",
+                    "minLength": null,
+                    "maxLength": null,
+                    "regex": null
+                }
+            }
+        }
+    }
+}

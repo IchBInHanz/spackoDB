@@ -3,7 +3,8 @@ const reqConfig = require('../configs/req.json')
 
 
 exports.routes = async (req) => {
-    if (await reqUtils.checkParams(req.body, reqConfig.actions)) {
+    checkParams = await reqUtils.checkParams(req.body, reqConfig.actions)
+    if (checkParams.code == 200) {
         return {
             code: 200,
             response: {
@@ -12,10 +13,8 @@ exports.routes = async (req) => {
         }
     } else {
         return {
-            code: 200,
-            response: {
-                error: "Some Error"
-            }
+            code: checkParams.code,
+            response: checkParams.response
         } 
     }
 }

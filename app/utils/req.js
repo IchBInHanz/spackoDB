@@ -11,6 +11,31 @@ exports.checkParams = (body, params) => {
 
                 // checking type
                 if (value.type || value.type !== null) {
+                    if (value.type == 'object') {
+                        try {
+                            body[key] = JSON.parse(body[key])
+                        } catch (error) {
+                            resolve({
+                                code: 400,
+                                response: {
+                                    error: `${key} is invalid`
+                                }
+                            });
+                        }
+                    }
+
+                    if (value.type == 'number') {
+                        if (parseInt(body[key]) == NaN) {
+                            resolve({
+                                code: 400,
+                                response: {
+                                    error: `${key} is invalid`
+                                }
+                            });
+                        } else {
+                            body[key] = parseInt(body[key])
+                        }
+                    }
                     if (!typeof body[key] == value.type) {
                         resolve({
                             code: 400,
@@ -66,47 +91,6 @@ exports.checkParams = (body, params) => {
                     }
                 });
             }
-            // if (!missing) {
-            //     console.log('HMM')
-            //     for (const [key, value] of Object.entries(params[body.action].params)) {
-            //         if (!body[key] && value.req == true) {
-            //             console.log(body[key])
-            //             // checking type
-            //             if (value.type || value.type !== null) {
-            //                 if (!typeof body[key] == value.type) {
-            //                     resolve({
-            //                         code: 400,
-            //                         response: {
-            //                             error: `${body[key]} is invalid`
-            //                         }
-            //                     });
-            //                 }
-            //             }
-            //             // checking minLength
-            //             if (value.minLength || value.minLength !== null) {
-            //                 // console.log(body[key].length)
-            //                 if (body[key].length < value.minLength) {
-            //                     resolve({
-            //                         code: 400,
-            //                         response: {
-            //                             error: `${body[key]} is invalid`
-            //                         }
-            //                     });
-            //                 }
-            //             }
-            //         }
-            //     }
-                // resolve({
-                //     code: 200
-                // });
-            // } else {
-                // resolve({
-                //     code: 400,
-                //     response: {
-                //         error: 'Missing Argument'
-                //     }
-                // });
-            // }
         } else {
             resolve({
                 code: 400,

@@ -13,7 +13,7 @@
                     "req": true,
                     "type": "string",
                     "minLength": 3,
-                    "maxLength": 10,
+                    "maxLength": 1024,
                     "regex": null
                 },
                 "data": {
